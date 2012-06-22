@@ -20,12 +20,15 @@ module Pipewise
   # :created (optional) - If you want to specify the time you first encountered this
   # customer set :created to a valid Time instance. If omitted, it will be set to the
   # current time by the Pipewise server.
-  def track_user(email, user_properties = {})
+  def track_customer(email, customer_properties = {})
     post_request('track', {:email => email}.merge(
-        user_properties.has_key?(:created) ?
-          user_properties.merge(:created => user_properties[:created].to_i * 1000) :
-          user_properties))
+        customer_properties.has_key?(:created) ?
+          customer_properties.merge(:created => customer_properties[:created].to_i * 1000) :
+          customer_properties))
   end
+  
+  #Old method
+  alias :track_user :track_customer # for backward compatibility
 
   # Sends event info to Pipewise for the user identifed by the given email
   # address (required) and records an event of the given type (required). This method
