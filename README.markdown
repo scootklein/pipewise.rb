@@ -37,13 +37,10 @@ _Note on HTTPS_: When using HTTPS, you may see errors when attempting to verify 
 
 The `track_customer` method will create a new customer or update an existing one. The method requires the customer's email address, and also takes an optional hash of custom and standard customer properties. If you want to specify the time you first encountered this customer, set `:created` to a valid `Time` instance. If omitted, it will be set to the current time by the Pipewise server. This only needs to be set when tracking a customer for the first time. Subsequent updates will preserve the original value.
 
-
     # Load a customer of your app
     my_app_customer = Customer.find(my_customer_id)
     Pipewise.track_customer(my_app_customer.email, :created => my_app_customer.created_at,
-                        :subscription_type => 'premium')
-
-    * Also you can use old method Pipewise.track_user 
+                            :subscription_type => 'premium')
 
 If the call succeeds, `track_customer` will return true. If there is a problem, an exception will be raised (more on this below).
 
